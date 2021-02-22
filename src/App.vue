@@ -18,6 +18,45 @@
   <Input v-model="formName" />
 
   <!-- Slots -->
+  <Card></Card>
+  <Card>Card Content</Card>
+  <Card><img src="https://picsum.photos/200" /></Card>
+  <Card>
+    <template v-slot:header>
+      <h3>Header</h3>
+    </template>
+    <template v-slot:default>
+      <img src="https://picsum.photos/200" />
+    </template>
+    <template v-slot:footer>
+      <button>View Details</button>
+    </template>
+  </Card>
+  <NameList>
+    <template v-slot:default='slotProps'>
+      {{slotProps.firstName}} {{slotProps.lastName}}
+    </template>
+  </NameList>
+  <NameList>
+    <template v-slot:default='slotProps'>
+      {{slotProps.lastName}}, {{slotProps.firstName}} 
+    </template>
+  </NameList>
+
+  <!-- Dynamic Components -->
+  <button @click="activeTab = 'TabA'">TabA</button>
+  <button @click="activeTab = 'TabB'">TabB</button>
+  <button @click="activeTab = 'TabC'">TabC</button>
+  
+  <keep-alive>
+    <component :is="activeTab" />
+  </keep-alive>
+
+  <!-- <TabA v-if="activeTab == 'TabA'"/>
+  <TabB v-if="activeTab == 'TabB'"/>
+  <TabC v-if="activeTab == 'TabC'"/> -->
+  
+  
 </template>
 
 <script>
@@ -27,6 +66,12 @@ import Article from './components/Article';
 import ComponentC from './components/ComponentC';
 import Popup from './components/Popup';
 import Input from './components/Input';
+import Card from './components/Card';
+import NameList from './components/NameList';
+import TabA from './components/TabA';
+import TabB from './components/TabB';
+import TabC from './components/TabC';
+
 
 
 export default {
@@ -37,7 +82,12 @@ export default {
     Article,
     ComponentC,
     Popup,
-    Input
+    Input,
+    Card, 
+    NameList,
+    TabA,
+    TabB,
+    TabC
 
   },
   data(){
@@ -46,6 +96,7 @@ export default {
       lastName: 'Muller',
       showPopup: false,
       formName: '',
+      activeTab: 'TabA'
     }
   },
   methods:{
@@ -62,7 +113,7 @@ export default {
 }
 </script>
 
-<style>
+<style >
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
