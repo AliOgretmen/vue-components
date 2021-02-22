@@ -1,15 +1,25 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <Greet name='Jan'/>
+  <Greet :name='name' :last-name='lastName'/>
+  <DateNow />
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Greet from './components/Greet';
+import DateNow from './components/DateNow';
+
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Greet, DateNow
+  },
+  data(){
+    return{
+      name: 'Max',
+      lastName: 'Muller'
+    }
   }
 }
 </script>
